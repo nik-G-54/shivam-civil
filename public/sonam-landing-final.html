@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sonam Sales Corporation — Tubewell Drilling &amp; Water Infrastructure, UP</title>
+<meta name="description" content="Sonam Sales Corporation — tubewell drilling, rainwater harvesting, overhead tank construction and government infrastructure across Uttar Pradesh. Est. 1991.">
+<meta property="og:title" content="Sonam Sales Corporation — Tubewell Drilling &amp; Water Infrastructure">
+<meta property="og:description" content="33+ years drilling tubewells and building water infrastructure across Uttar Pradesh.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.css">
+<style>
+  :root{
+    --ink:#1E211D; --ink-soft:#454B42;
+    --paper:#E7E3D6; --paper-2:#DCD5C0; --paper-3:#F1EEE4;
+    --rust:#9A3412; --rust-dark:#742609;
+    --water:#1F5266; --water-soft:#3E7A8F;
+    --ochre:#B8842E; --line:#C3BBA2;
+    --max:1180px;
+    --swiper-theme-color:#9A3412;
+    --swiper-pagination-color:#9A3412;
+    --swiper-navigation-size:18px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:'Barlow', sans-serif; line-height:1.6; font-size:16px; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.display{ font-family:'Barlow Condensed', sans-serif; font-weight:800; line-height:0.98; margin:0; }
+  p{margin:0 0 1em 0;}
+  a{color:inherit;}
+  img{display:block; max-width:100%;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+  section{padding:100px 0; border-bottom:1px solid var(--line);}
+  .sec-head{ display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:end; margin-bottom:54px; }
+  .sec-head h2{ font-size:clamp(2rem, 2.4vw + 1rem, 2.8rem); }
+  .sec-head .sub{ color:var(--ink-soft); font-size:1.02rem; max-width:44ch; }
+  .eyebrow{ font-size:0.75rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--rust); margin-bottom:10px; display:block; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  .photo{ position:relative; overflow:hidden; background:var(--paper-2); }
+  .photo img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .7s cubic-bezier(.2,.7,.2,1); }
+  .photo::after{ content:""; position:absolute; inset:0; background:linear-gradient(155deg, rgba(154,52,18,0.22), rgba(31,82,102,0.28)); mix-blend-mode:multiply; pointer-events:none; }
+  .photo:hover img{ transform:scale(1.06); }
+  .photo.img-fallback{ background:linear-gradient(155deg, var(--ochre), var(--water)); }
+  .photo.img-fallback img{ opacity:0; }
+
+  header.site-nav{ position:sticky; top:0; z-index:60; background:rgba(231,227,214,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+  .nav-inner{ display:flex; align-items:center; justify-content:space-between; padding:16px 28px; max-width:var(--max); margin:0 auto; }
+  .brand{ display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed', sans-serif; font-weight:800; font-size:1.25rem; text-decoration:none; color:var(--ink); }
+  .brand svg{ width:32px; height:32px; flex:none; }
+  .brand small{ display:block; font-family:'Barlow', sans-serif; font-weight:500; font-size:0.58rem; letter-spacing:0.07em; color:var(--ink-soft); text-transform:uppercase; margin-top:2px; }
+  nav.links{ display:flex; align-items:center; gap:26px; }
+  nav.links a{ text-decoration:none; font-weight:600; font-size:0.92rem; color:var(--ink-soft); border-bottom:2px solid transparent; padding-bottom:2px; transition:color .15s ease, border-color .15s ease; }
+  nav.links a:hover{ color:var(--rust); border-color:var(--rust); }
+  .nav-cta{ display:inline-flex; align-items:center; gap:8px; background:var(--rust); color:var(--paper-3); padding:10px 18px; text-decoration:none; font-weight:600; font-size:0.88rem; border:1px solid var(--rust); transition:background .15s ease; }
+  .nav-cta:hover{ background:var(--rust-dark); }
+  .menu-btn{ display:none; background:none; border:1px solid var(--ink); width:42px; height:38px; cursor:pointer; align-items:center; justify-content:center; }
+  .menu-btn::before, .menu-btn::after{ content:""; display:block; width:20px; height:2px; background:var(--ink); }
+  .menu-btn::before{ margin-bottom:5px; } .menu-btn::after{ margin-top:5px; }
+
+  .hero{ position:relative; height:92vh; min-height:620px; overflow:hidden; border-bottom:none; padding:0; }
+  .hero-photo{ position:absolute; inset:-6% -6%; }
+  .hero-photo img{ width:100%; height:100%; object-fit:cover; animation:kenburns 22s ease-in-out infinite alternate; }
+  @keyframes kenburns{ from{ transform:scale(1) translate(0,0); } to{ transform:scale(1.13) translate(-1%,-1%); } }
+  .hero-scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(18,18,15,0.6) 0%, rgba(18,18,15,0.32) 42%, rgba(18,18,15,0.8) 100%); }
+  .hero-content{ position:relative; z-index:2; height:100%; display:flex; flex-direction:column; justify-content:center; color:var(--paper-3); }
+  .hero-badge{ display:inline-block; font-size:0.72rem; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; border:1px solid rgba(241,238,228,0.55); padding:6px 12px; margin-bottom:20px; width:fit-content; }
+  .hero h1{ font-size:clamp(2.4rem, 5vw, 4.4rem); max-width:16ch; }
+  .hero p.lede{ font-size:1.14rem; max-width:48ch; margin-top:20px; opacity:0.95; font-weight:500; }
+  .hero-ctas{ display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
+  .btn{ display:inline-flex; align-items:center; gap:9px; padding:15px 24px; text-decoration:none; font-weight:600; font-size:0.98rem; border:1px solid var(--paper-3); cursor:pointer; }
+  .btn-primary{ background:var(--rust); border-color:var(--rust); color:var(--paper-3); }
+  .btn-primary:hover{ background:var(--rust-dark); border-color:var(--rust-dark); }
+  .btn-outline{ background:transparent; color:var(--paper-3); }
+  .btn-outline:hover{ background:var(--paper-3); color:var(--ink); }
+  .scroll-cue{ position:absolute; bottom:26px; left:0; right:0; z-index:2; display:flex; justify-content:center; }
+  .scroll-cue svg{ animation:bob 1.8s ease-in-out infinite; color:var(--paper-3); }
+  @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);} }
+
+  .marquee-wrap{ background:var(--ink); color:var(--paper-3); overflow:hidden; padding:16px 0; border-bottom:1px solid var(--line); }
+  .marquee{ display:flex; width:max-content; animation:marquee 26s linear infinite; }
+  .marquee span{ display:flex; align-items:center; gap:14px; padding:0 22px; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.05rem; letter-spacing:0.02em; white-space:nowrap; }
+  .marquee span::after{ content:"•"; color:var(--rust); margin-left:14px; }
+  @keyframes marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+  .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+  .about-copy p{ color:var(--ink-soft); font-size:1.03rem; }
+  .about-photo{ aspect-ratio:4/5; border:1px solid var(--line); }
+  .stat-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:36px; }
+  .stat{ border-top:2px solid var(--rust); padding-top:12px; }
+  .stat .num{ font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:2.1rem; color:var(--ink); display:inline-block; line-height:1; }
+  .stat .lbl{ font-size:0.8rem; color:var(--ink-soft); margin-top:4px; }
+
+  .service-item{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; margin-bottom:88px; }
+  .service-item:last-child{ margin-bottom:0; }
+  .service-item.flip .photo{ order:2; }
+  .service-item .photo{ aspect-ratio:4/3; border:1px solid var(--line); }
+  .service-num{ font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:0.95rem; color:var(--water); letter-spacing:0.05em; }
+  .service-item h3{ font-size:2rem; margin-top:8px; }
+  .service-item p{ color:var(--ink-soft); font-size:1.02rem; margin-top:14px; max-width:52ch; }
+  .service-tags{ display:flex; gap:8px; margin-top:16px; flex-wrap:wrap; }
+  .service-tags span{ font-size:0.78rem; font-weight:600; border:1px solid var(--line); padding:5px 11px; color:var(--ink-soft); }
+
+  /* Swiper customization */
+  .work-swiper{ padding-bottom:56px !important; }
+  .work-swiper .swiper-slide{ aspect-ratio:16/9; }
+  .swiper-caption{ position:absolute; left:0; right:0; bottom:0; z-index:2; padding:26px 30px; background:linear-gradient(0deg, rgba(18,18,15,0.78), rgba(18,18,15,0)); color:var(--paper-3); }
+  .swiper-caption h4{ font-family:'Barlow Condensed',sans-serif; font-size:1.3rem; font-weight:700; margin:0; }
+  .swiper-caption span{ font-size:0.8rem; opacity:0.85; }
+  .work-swiper .swiper-button-next, .work-swiper .swiper-button-prev{ width:44px; height:44px; background:var(--ink); color:var(--paper-3); border-radius:50%; }
+  .work-swiper .swiper-button-next:after, .work-swiper .swiper-button-prev:after{ font-size:16px; }
+  .work-swiper .swiper-pagination-bullet{ background:var(--line); opacity:1; width:9px; height:9px; }
+  .work-swiper .swiper-pagination-bullet-active{ background:var(--rust); }
+
+  .process-band{ position:relative; padding:0; border-bottom:1px solid var(--line); overflow:hidden; }
+  .process-photo{ position:absolute; inset:0; }
+  .process-photo img{ width:100%; height:120%; object-fit:cover; }
+  .process-scrim{ position:absolute; inset:0; background:rgba(18,18,15,0.74); }
+  .process-inner{ position:relative; z-index:2; padding:100px 0; color:var(--paper-3); }
+  .process-inner .sec-head h2, .process-inner .sec-head .sub{ color:var(--paper-3); }
+  .process-strip{ display:grid; grid-template-columns:repeat(5,1fr); gap:20px; position:relative; }
+  .process-strip::before{ content:""; position:absolute; top:26px; left:0; right:0; height:1px; background:rgba(241,238,228,0.3); }
+  .p-step .idx{ width:52px; height:52px; border-radius:50%; background:var(--ink); border:2px solid var(--water-soft); color:var(--paper-3); font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.3rem; display:flex; align-items:center; justify-content:center; position:relative; z-index:2; margin-bottom:16px; }
+  .p-step h3{ font-size:1.1rem; font-weight:700; margin-bottom:8px; color:var(--paper-3); }
+  .p-step p{ color:rgba(241,238,228,0.78); font-size:0.92rem; }
+
+  .why-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:26px; }
+  .why-card{ border:1px solid var(--line); padding:26px 22px; background:var(--paper-3); }
+  .why-card .icon{ width:34px; height:34px; color:var(--rust); margin-bottom:14px; }
+  .why-card h3{ font-size:1.12rem; font-weight:700; margin-bottom:8px; }
+  .why-card p{ color:var(--ink-soft); font-size:0.92rem; margin:0; }
+
+  .review-strip{ display:flex; gap:20px; margin-top:44px; flex-wrap:wrap; }
+  .review-card{ flex:1; min-width:220px; border:1px solid var(--line); background:var(--paper-3); padding:22px; }
+  .review-card .stars{ color:var(--ochre); font-size:1.1rem; letter-spacing:2px; }
+  .review-card .score{ font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.6rem; margin-top:6px; }
+  .review-card .src{ font-size:0.82rem; color:var(--ink-soft); margin-top:4px; }
+
+  .area-list{ list-style:none; margin:24px 0 0; padding:0; }
+  .area-list li{ display:flex; justify-content:space-between; padding:14px 0; border-top:1px solid var(--line); font-weight:600; }
+  .area-list li:last-child{ border-bottom:1px solid var(--line); }
+  .area-list span.tag{ color:var(--water); font-weight:600; font-size:0.85rem; }
+
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; }
+  .contact-block{ margin-bottom:26px; }
+  .contact-block h3{ font-size:1.02rem; font-weight:700; margin-bottom:6px; }
+  .contact-block a{ text-decoration:none; color:var(--rust); font-weight:600; }
+  .map-frame{ border:1px solid var(--line); width:100%; height:230px; margin-top:10px; }
+  .map-frame iframe{ width:100%; height:100%; border:0; filter:grayscale(0.25) contrast(1.05); }
+  form.enquiry{ display:flex; flex-direction:column; gap:15px; }
+  .field{ display:flex; flex-direction:column; gap:6px; }
+  .field label{ font-size:0.8rem; font-weight:600; color:var(--ink-soft); }
+  .field input, .field select, .field textarea{ font-family:'Barlow', sans-serif; font-size:1rem; padding:12px 14px; border:1px solid var(--line); background:var(--paper-3); color:var(--ink); }
+  .field textarea{ resize:vertical; min-height:96px; }
+  .field input:focus, .field select:focus, .field textarea:focus{ outline:2px solid var(--water); outline-offset:1px; }
+  .form-note{ font-size:0.8rem; color:var(--ink-soft); margin-top:-4px; }
+
+  footer.site-footer{ padding:44px 0 100px; }
+  .footer-grid{ display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px; }
+  .footer-brand{ font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.3rem; }
+  .footer-links{ display:flex; gap:24px; flex-wrap:wrap; }
+  .footer-links a{ text-decoration:none; color:var(--ink-soft); font-weight:600; font-size:0.88rem; }
+  .footer-bottom{ margin-top:28px; padding-top:18px; border-top:1px solid var(--line); font-size:0.78rem; color:var(--ink-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+
+  .mobile-cta{ display:none; position:fixed; bottom:0; left:0; right:0; z-index:70; background:var(--ink); padding:10px; gap:10px; }
+  .mobile-cta a{ flex:1; text-align:center; padding:12px; text-decoration:none; font-weight:700; font-size:0.9rem; }
+  .mobile-cta .call{ background:var(--rust); color:var(--paper-3); }
+  .mobile-cta .wa{ background:var(--water); color:var(--paper-3); }
+
+  @media (max-width:900px){
+    nav.links{ display:none; }
+    .menu-btn{ display:flex; }
+    .hero h1{ font-size:clamp(2.1rem,7vw,3rem); }
+    .about-grid{ grid-template-columns:1fr; }
+    .about-photo{ order:-1; aspect-ratio:16/9; }
+    .stat-row{ grid-template-columns:repeat(2,1fr); }
+    .service-item{ grid-template-columns:1fr; gap:26px; margin-bottom:60px; }
+    .service-item.flip .photo{ order:0; }
+    .sec-head{ grid-template-columns:1fr; }
+    .process-strip{ grid-template-columns:1fr 1fr; row-gap:30px; }
+    .process-strip::before{ display:none; }
+    .why-grid{ grid-template-columns:1fr 1fr; }
+    .review-strip{ flex-direction:column; }
+    .contact-grid{ grid-template-columns:1fr; }
+    section{ padding:64px 0; }
+    .mobile-cta{ display:flex; }
+    footer.site-footer{ padding-bottom:110px; }
+  }
+  @media (max-width:560px){
+    .stat-row{ grid-template-columns:1fr 1fr; }
+    .why-grid{ grid-template-columns:1fr; }
+    .nav-cta{ display:none; }
+    .work-swiper .swiper-slide{ aspect-ratio:4/5; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <svg viewBox="0 0 40 40" fill="none"><rect x="17" y="4" width="6" height="26" fill="#9A3412"/><path d="M20 30 L26 40 L14 40 Z" fill="#9A3412"/><rect x="8" y="4" width="24" height="6" fill="#1E211D"/></svg>
+      <span>SONAM SALES CORP.<small>Tubewell &amp; Water Infrastructure</small></span>
+    </a>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="tel:+919889556111">Call Now</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu"></button>
+  </div>
+  <nav class="links" id="mobileNav" style="display:none; flex-direction:column; gap:0; padding:0 28px 20px;">
+    <a href="#about" style="padding:10px 0;">About</a>
+    <a href="#services" style="padding:10px 0;">Services</a>
+    <a href="#work" style="padding:10px 0;">Our Work</a>
+    <a href="#process" style="padding:10px 0;">Process</a>
+    <a href="#contact" style="padding:10px 0;">Contact</a>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-photo" id="heroPhoto">
+    <div class="photo" style="width:100%; height:100%;">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rig_drilling_known_locally_as_Borewell_for_Water_well_drilling_in_operation_in_India.jpg"
+           alt="Borewell drilling rig in operation in India" onerror="this.parentElement.classList.add('img-fallback')">
+    </div>
+  </div>
+  <div class="hero-scrim"></div>
+  <div class="wrap hero-content">
+    <span class="hero-badge">Government Approved · Est. 1991</span>
+    <h1>Thirty-three years of finding water where the ground won't give it up.</h1>
+    <p class="lede">Sonam Sales Corporation drills tubewells, builds overhead tanks and lays water infrastructure across Uttar Pradesh — for homes, farms, factories and government projects.</p>
+    <div class="hero-ctas">
+      <a href="tel:+919889556111" class="btn btn-primary">Call +91 98895 56111</a>
+      <a href="#contact" class="btn btn-outline">Request a Site Visit</a>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee" id="marquee">
+    <span>TUBEWELL &amp; BOREWELL DRILLING</span>
+    <span>RAINWATER HARVESTING</span>
+    <span>OVERHEAD TANK CONSTRUCTION</span>
+    <span>BOREWELL CLEANING &amp; REVIVAL</span>
+    <span>GOVERNMENT INFRASTRUCTURE</span>
+    <span>EST. 1991 · LUCKNOW &amp; HARDOI, UP</span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-copy" data-aos="fade-up">
+      <span class="eyebrow">About the company</span>
+      <h2 style="font-size:clamp(2rem,2.6vw+1rem,2.8rem); margin-bottom:22px;">A drilling outfit that grew into a full water-infrastructure contractor.</h2>
+      <p>Sonam Sales Corporation started in 1991 as a small tubewell-drilling operation working farms and homes around Lucknow and Hardoi. Thirty-three years on, the core of the job hasn't changed — a rig, a crew, and a plot of land that needs water — but the company around it has: it now builds overhead tanks, installs rainwater harvesting structures, and carries out government contracts for road, water-supply and telecom infrastructure across Uttar Pradesh.</p>
+      <p>The company holds Government Approved status, which allows it to bid on and execute public infrastructure work alongside its private borewell and construction business. Nothing is subcontracted out — the crew that surveys a site is the crew that finishes it, using equipment the company owns and operates itself.</p>
+      <p>Clients span four sectors: domestic households needing a dependable connection, industrial units with higher-volume requirements, agricultural land where a working borewell decides whether a season's harvest comes in, and government bodies commissioning public infrastructure. Public listings on Justdial and Facebook put the company at a 4.6-out-of-5 rating and a 92% recommendation score — built up one borehole and one government contract at a time.</p>
+      <div class="stat-row">
+        <div class="stat"><span class="num" id="cAge">0</span><span class="lbl">Years in business</span></div>
+        <div class="stat"><span class="num" id="cYear">0</span><span class="lbl">Established</span></div>
+        <div class="stat"><span class="num" id="cRating">0</span>★<span class="lbl">Public rating (Justdial)</span></div>
+        <div class="stat"><span class="num" id="cRecommend">0</span>%<span class="lbl">Recommend (Facebook)</span></div>
+      </div>
+    </div>
+    <div class="about-photo photo" data-aos="fade-up" data-aos-delay="150">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Construction_Photography_of_Workers_on_Site_by_Construction_Photographer_Daniel_Mekis.jpg"
+           alt="Construction crew on site" loading="lazy" onerror="this.parentElement.classList.add('img-fallback')">
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head" data-aos="fade-up">
+      <h2>What we do</h2>
+      <p class="sub">Five services built around one thing: getting water where it needs to go, and infrastructure that holds up under government inspection.</p>
+    </div>
+
+    <div class="service-item" data-aos="fade-up">
+      <div class="photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rig_drilling_known_locally_as_Borewell_for_Water_well_drilling_in_operation_in_India.jpg" alt="Tubewell drilling rig at work" loading="lazy" onerror="this.parentElement.classList.add('img-fallback')"></div>
+      <div>
+        <span class="service-num">01</span>
+        <h3>Tubewell &amp; Borewell Drilling</h3>
+        <p>Bores for homes, farms and factories, drilled to the depth the site actually needs — not a standard number. Domestic, industrial and agricultural connections, handled start to finish by our own rigs and crew.</p>
+        <div class="service-tags"><span>Domestic</span><span>Agricultural</span><span>Industrial</span></div>
+      </div>
+    </div>
+
+    <div class="service-item flip" data-aos="fade-up">
+      <div class="photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rain_water_harvesting_pit_being_constructed_at_Andhra_University_Engineering_College.jpg" alt="Rainwater harvesting pit under construction" loading="lazy" onerror="this.parentElement.classList.add('img-fallback')"></div>
+      <div>
+        <span class="service-num">02</span>
+        <h3>Rainwater Harvesting</h3>
+        <p>Recharge pits and structures that send monsoon runoff back into the ground instead of the drain — sized and built to local soil conditions, not a fixed template.</p>
+        <div class="service-tags"><span>Recharge pits</span><span>Runoff control</span></div>
+      </div>
+    </div>
+
+    <div class="service-item" data-aos="fade-up">
+      <div class="photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Guruvayur_GLR_Water_tank.JPG" alt="Overhead water tank structure" loading="lazy" onerror="this.parentElement.classList.add('img-fallback')"></div>
+      <div>
+        <span class="service-num">03</span>
+        <h3>Overhead Tank Construction</h3>
+        <p>Storage built to hold pressure and years of weather, sized against daily draw rather than a fixed catalogue capacity. Built, cured and waterproofed on site.</p>
+        <div class="service-tags"><span>RCC tanks</span><span>Waterproofing</span></div>
+      </div>
+    </div>
+
+    <div class="service-item flip" data-aos="fade-up">
+      <div class="photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Water_Tank_Junction,_Vijayanagar,_Mysore.jpg" alt="Urban water infrastructure junction" loading="lazy" onerror="this.parentElement.classList.add('img-fallback')"></div>
+      <div>
+        <span class="service-num">04</span>
+        <h3>Borewell Cleaning &amp; Revival</h3>
+        <p>Silted, choked or slow-yielding bores cleaned out and brought back to working capacity — often at a fraction of the cost of sinking a new one.</p>
+        <div class="service-tags"><span>Desilting</span><span>Yield restoration</span></div>
+      </div>
+    </div>
+
+    <div class="service-item" data-aos="fade-up">
+      <div class="photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Road_construction_on_going.jpg" alt="Road construction underway" loading="lazy" onerror="this.parentElement.classList.add('img-fallback')"></div>
+      <div>
+        <span class="service-num">05</span>
+        <h3>Government Infrastructure Projects</h3>
+        <p>Road, water-supply and telecom contract work carried out to government specification and timeline — the same crew and standards as our private jobs, under our Government Approved status.</p>
+        <div class="service-tags"><span>Roads</span><span>Water supply</span><span>Telecom</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head" data-aos="fade-up">
+      <h2>Our work, in the field</h2>
+      <p class="sub">A look at the kind of jobsite each service actually involves — drilling, structures, and the crew doing it. Drag, swipe, or use the arrows.</p>
+    </div>
+    <div class="swiper work-swiper" data-aos="fade-up">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="photo" style="width:100%;height:100%;"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rig_drilling_known_locally_as_Borewell_for_Water_well_drilling_in_operation_in_India.jpg" alt="Drilling rig in operation" loading="lazy" onerror="this.parentElement.classList.add('img-fallback')"></div>
+          <div class="swiper-caption"><span>Tubewell &amp; Borewell Drilling</span><h4>Drilling in progress — rig on site, boring to depth</h4></div>
+        </div>
+        <div class="swiper-slide">
+          <div class="photo" style="width:100%;height:100%;"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rain_water_harvesting_pit_being_constructed_at_Andhra_University_Engineering_College.jpg" alt="Rainwater harvesting pit construction" loading="lazy" onerror="this.parentElement.classList.add('img-fallback')"></div>
+          <div class="swiper-caption"><span>Rainwater Harvesting</span><h4>A recharge pit under construction</h4></div>
+        </div>
+        <div class="swiper-slide">
+          <div class="photo" style="width:100%;height:100%;"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Guruvayur_GLR_Water_tank.JPG" alt="Overhead water tank" loading="lazy" onerror="this.parentElement.classList.add('img-fallback')"></div>
+          <div class="swiper-caption"><span>Overhead Tank Construction</span><h4>Storage built to hold pressure for years</h4></div>
+        </div>
+        <div class="swiper-slide">
+          <div class="photo" style="width:100%;height:100%;"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Road_construction_on_going.jpg" alt="Road construction site" loading="lazy" onerror="this.parentElement.classList.add('img-fallback')"></div>
+          <div class="swiper-caption"><span>Government Infrastructure</span><h4>Road work carried out to spec and timeline</h4></div>
+        </div>
+        <div class="swiper-slide">
+          <div class="photo" style="width:100%;height:100%;"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Construction_Photography_of_Workers_on_Site_by_Construction_Photographer_Daniel_Mekis.jpg" alt="Construction crew on site" loading="lazy" onerror="this.parentElement.classList.add('img-fallback')"></div>
+          <div class="swiper-caption"><span>The Crew</span><h4>The same crew, on every job</h4></div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </div>
+</section>
+
+<div class="process-band" id="process">
+  <div class="process-photo" id="processPhoto">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rig_drilling_known_locally_as_Borewell_for_Water_well_drilling_in_operation_in_India.jpg" alt="" loading="lazy">
+  </div>
+  <div class="process-scrim"></div>
+  <div class="process-inner">
+    <div class="wrap">
+      <div class="sec-head" data-aos="fade-up">
+        <h2>How a project runs</h2>
+        <p class="sub">The same five stages, whether it's one borewell for a house or a multi-site government contract.</p>
+      </div>
+      <div class="process-strip">
+        <div class="p-step" data-aos="fade-up" data-aos-delay="0"><div class="idx">1</div><h3>Site Survey</h3><p>We inspect the ground and talk through what you need before any equipment moves in.</p></div>
+        <div class="p-step" data-aos="fade-up" data-aos-delay="80"><div class="idx">2</div><h3>Drilling</h3><p>Our rigs bore to the depth the site calls for, through soil or rock, with our own crew.</p></div>
+        <div class="p-step" data-aos="fade-up" data-aos-delay="160"><div class="idx">3</div><h3>Casing &amp; Development</h3><p>Pipe is set, the bore is developed, and yield is checked against expectations.</p></div>
+        <div class="p-step" data-aos="fade-up" data-aos-delay="240"><div class="idx">4</div><h3>Testing</h3><p>Flow rate and water quality are tested before we call the job finished.</p></div>
+        <div class="p-step" data-aos="fade-up" data-aos-delay="320"><div class="idx">5</div><h3>Handover</h3><p>You get a working bore or structure, plus a record of what was installed and at what depth.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head" data-aos="fade-up">
+      <h2>Why clients keep calling us back</h2>
+      <p class="sub">No subcontracted drilling, no guesswork on depth, and paperwork that holds up for government tenders.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card" data-aos="fade-up" data-aos-delay="0">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <h3>33 years on the ground</h3>
+        <p>In business since 1991 — long enough to know how the water table in this region behaves, season to season.</p>
+      </div>
+      <div class="why-card" data-aos="fade-up" data-aos-delay="80">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/></svg>
+        <h3>Government approved</h3>
+        <p>Approved status for road, water and telecom infrastructure work, not just private borewell contracts.</p>
+      </div>
+      <div class="why-card" data-aos="fade-up" data-aos-delay="160">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="8" width="14" height="9"/><circle cx="7" cy="17" r="2"/><circle cx="15" cy="17" r="2"/><path d="M17 11h3l2 3v3h-5"/></svg>
+        <h3>Our own rigs &amp; crew</h3>
+        <p>Drilling isn't subcontracted — the crew that surveys your site is the crew that finishes the job.</p>
+      </div>
+      <div class="why-card" data-aos="fade-up" data-aos-delay="240">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21v-7a2 2 0 012-2h12a2 2 0 012 2v7"/><path d="M9 21V9a2 2 0 012-2h2a2 2 0 012 2v12"/></svg>
+        <h3>Every sector served</h3>
+        <p>Domestic households, industrial units, agricultural land and government bodies, all to the same standard.</p>
+      </div>
+    </div>
+
+    <div class="review-strip">
+      <div class="review-card" data-aos="fade-up">
+        <div class="stars">★★★★★</div>
+        <div class="score">4.6 / 5</div>
+        <div class="src">Public rating on Justdial (16 reviews)</div>
+      </div>
+      <div class="review-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="stars">★★★★★</div>
+        <div class="score">92% recommend</div>
+        <div class="src">Public rating on Facebook (14 reviews)</div>
+      </div>
+      <div class="review-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="stars">★★★★★</div>
+        <div class="score">33+ years</div>
+        <div class="src">In business, no name changes, same ownership</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="area">
+  <div class="wrap about-grid">
+    <div data-aos="fade-up">
+      <span class="eyebrow">Coverage</span>
+      <h2 style="font-size:clamp(2rem, 2.4vw + 1rem, 2.7rem);">Where we work</h2>
+      <p class="sub" style="margin-top:14px; color:var(--ink-soft); max-width:44ch;">Based out of Lucknow and Hardoi, with crews that travel across Uttar Pradesh for larger contracts and government projects.</p>
+      <ul class="area-list">
+        <li>Lucknow <span class="tag">Head office</span></li>
+        <li>Hardoi <span class="tag">Base district</span></li>
+        <li>Kanpur &amp; nearby districts <span class="tag">On request</span></li>
+        <li>Statewide, UP <span class="tag">Government contracts</span></li>
+      </ul>
+    </div>
+    <div class="about-photo photo" data-aos="fade-up" data-aos-delay="150">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Asphalt_paver_working.jpg" alt="Infrastructure work in progress" loading="lazy" onerror="this.parentElement.classList.add('img-fallback')">
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="sec-head" data-aos="fade-up">
+      <h2>Get in touch</h2>
+      <p class="sub">Call for urgent work, or send an enquiry with your location and what you need — we'll get back with a site-visit date.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info" data-aos="fade-up">
+        <div class="contact-block"><h3>Phone</h3><a href="tel:+919889556111">+91 98895 56111</a></div>
+        <div class="contact-block"><h3>Email</h3><a href="mailto:sonamsales111@gmail.com">sonamsales111@gmail.com</a></div>
+        <div class="contact-block"><h3>WhatsApp</h3><a href="https://wa.me/919889556111" target="_blank" rel="noopener">Chat on WhatsApp</a></div>
+        <div class="contact-block">
+          <h3>Office</h3>
+          <p style="margin:0; color:var(--ink-soft);">Chand Ganj Garden, Kapoorthala,<br>Lucknow, Uttar Pradesh</p>
+          <div class="map-frame">
+            <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Chand+Ganj+Garden+Kapoorthala+Lucknow+Uttar+Pradesh&output=embed"></iframe>
+          </div>
+        </div>
+      </div>
+      <form class="enquiry" id="enquiryForm" data-aos="fade-up" data-aos-delay="120">
+        <div class="field"><label for="name">Name</label><input type="text" id="name" name="name" required></div>
+        <div class="field"><label for="phone">Phone number</label><input type="tel" id="phone" name="phone" required></div>
+        <div class="field">
+          <label for="service">What do you need?</label>
+          <select id="service" name="service">
+            <option>Tubewell / Borewell Drilling</option>
+            <option>Rainwater Harvesting</option>
+            <option>Overhead Tank Construction</option>
+            <option>Borewell Cleaning &amp; Revival</option>
+            <option>Government Infrastructure Project</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="field"><label for="location">Site location</label><input type="text" id="location" name="location" placeholder="Village / area, district"></div>
+        <div class="field"><label for="message">Details</label><textarea id="message" name="message" placeholder="Tell us a bit about the site and what you need"></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; border-color:var(--rust);">Send Enquiry</button>
+        <p class="form-note">This opens your email app with the details filled in — swap this for a form service or WhatsApp link once you're ready to go live.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">SONAM SALES CORPORATION</div>
+        <p style="color:var(--ink-soft); max-width:38ch; margin-top:8px;">Tubewell drilling, water infrastructure &amp; government contracting in Lucknow &amp; Hardoi, Uttar Pradesh.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#work">Our Work</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Sonam Sales Corporation. All rights reserved.</span>
+      <span>Site photography: Wikimedia Commons (Creative Commons licensed)</span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-cta">
+  <a class="call" href="tel:+919889556111">Call Now</a>
+  <a class="wa" href="https://wa.me/919889556111" target="_blank" rel="noopener">WhatsApp</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.0/countUp.min.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const menuBtn = document.getElementById('menuBtn');
+const mobileNav = document.getElementById('mobileNav');
+menuBtn.addEventListener('click', () => { mobileNav.style.display = mobileNav.style.display === 'flex' ? 'none' : 'flex'; });
+mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.style.display = 'none'));
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (typeof AOS !== 'undefined') {
+  AOS.init({ duration: 700, once: true, offset: 80, easing: 'ease-out-cubic', disable: reduceMotion });
+}
+
+if (typeof Swiper !== 'undefined') {
+  new Swiper('.work-swiper', {
+    loop: true,
+    autoplay: reduceMotion ? false : { delay: 4200, disableOnInteraction: false },
+    speed: 650,
+    slidesPerView: 1,
+    spaceBetween: 0,
+    pagination: { el: '.swiper-pagination', clickable: true },
+    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+    a11y: true,
+    grabCursor: true
+  });
+}
+
+/* animated stat counters using CountUp.js, triggered on scroll into view via its built-in scrollSpy */
+function makeCounter(id, endVal, opts){
+  const el = document.getElementById(id);
+  if(!el) return;
+  if (typeof CountUp === 'undefined' || reduceMotion){
+    el.textContent = (opts && opts.decimalPlaces) ? endVal.toFixed(opts.decimalPlaces) : endVal;
+    return;
+  }
+  const cu = new CountUp(id, endVal, Object.assign({
+    duration: 1.6, enableScrollSpy: true, scrollSpyOnce: true, scrollSpyDelay: 100
+  }, opts||{}));
+  if(cu.error){ el.textContent = (opts && opts.decimalPlaces) ? endVal.toFixed(opts.decimalPlaces) : endVal; console.error(cu.error); }
+}
+makeCounter('cAge', 33, {duration:1.4});
+makeCounter('cYear', 1991, {duration:1.6, useGrouping:false});
+makeCounter('cRating', 4.6, {decimalPlaces:1, duration:1.4});
+makeCounter('cRecommend', 92, {duration:1.4});
+
+/* hero + process parallax */
+const heroPhoto = document.getElementById('heroPhoto');
+const processPhoto = document.getElementById('processPhoto');
+function onScroll(){
+  if(!reduceMotion){
+    const y = window.scrollY;
+    if(heroPhoto){
+      const heroH = document.querySelector('.hero').offsetHeight;
+      if(y < heroH){ heroPhoto.style.transform = 'translateY(' + (y*0.25) + 'px)'; }
+    }
+    if(processPhoto){
+      const rect = processPhoto.parentElement.getBoundingClientRect();
+      if(rect.top < window.innerHeight && rect.bottom > 0){
+        const offset = (window.innerHeight - rect.top) * 0.08;
+        processPhoto.style.transform = 'translateY(' + (-offset) + 'px)';
+      }
+    }
+  }
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+/* enquiry form -> mailto */
+document.getElementById('enquiryForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = document.getElementById('name').value;
+  const phone = document.getElementById('phone').value;
+  const service = document.getElementById('service').value;
+  const location = document.getElementById('location').value;
+  const message = document.getElementById('message').value;
+  const subject = encodeURIComponent('Enquiry: ' + service);
+  const body = encodeURIComponent('Name: ' + name + '\nPhone: ' + phone + '\nService: ' + service + '\nLocation: ' + location + '\n\nDetails:\n' + message);
+  window.location.href = 'mailto:sonamsales111@gmail.com?subject=' + subject + '&body=' + body;
+});
+</script>
+
+</body>
+</html>
