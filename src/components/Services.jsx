@@ -4,118 +4,141 @@ import { motion } from 'framer-motion';
 const servicesData = [
   {
     id: '01',
-    title: 'Water Infrastructure & Pipeline',
+    category: 'WATER PIPELINES',
+    title: 'Water Infrastructure & Distribution',
     image: '/images/69d097735e70dc91395caa33c17135f3.jpg',
-    description: 'Pipeline installation, water distribution networks, and Jal Jeevan Mission projects — sized and built to site conditions, connecting communities to clean water supply.',
-    tags: ['Pipeline', 'Jal Jeevan Mission', 'Water Supply'],
-    flipped: false,
+    description: 'High-volume drinking water pipelines, distribution networks, pumping stations, and Jal Jeevan Mission connections engineered to strict government specifications.',
+    tags: ['Pipelines', 'Jal Jeevan', 'Distribution']
   },
   {
     id: '02',
-    title: 'Civil Construction',
+    category: 'CIVIL WORKS',
+    title: 'Civil Construction & Roads',
     image: '/images/bb662e01144043aabe59741d141e408e.jpg',
-    description: 'Roads, drainage systems, RCC structures, foundations and site development — built to government specification with our own crew and equipment on every job.',
-    tags: ['Roads', 'Drainage', 'RCC Structures'],
-    flipped: true,
+    description: 'RCC foundation works, utility drainage corridors, access roadways, and structural concrete engineering executed with our own site teams and heavy machinery.',
+    tags: ['Roads', 'RCC Structures', 'Drainage']
   },
   {
     id: '03',
-    title: 'Overhead Tank & Reservoir Construction',
+    category: 'STORAGE TANKS',
+    title: 'Overhead Tanks & Ground Reservoirs',
     image: '/images/650047a8f4260231218333be145a8204.jpg',
-    description: 'Water storage built to hold pressure and years of weather — overhead tanks, ground-level reservoirs, sized against daily draw. Built, cured and waterproofed on site.',
-    tags: ['RCC Tanks', 'Reservoirs', 'Waterproofing'],
-    flipped: false,
+    description: 'Engineered reinforced concrete water towers and underground reservoirs built to withstand weather and hydraulic pressure. Cast, cured, and waterproofed on-site.',
+    tags: ['Overhead Tanks', 'Reservoirs', 'Waterproofing']
   },
   {
     id: '04',
+    category: 'GOVERNMENT CONTRACTS',
     title: 'Government Infrastructure Projects',
     image: '/images/c19d0e4020579ca7135e3d398b422be8.jpg',
-    description: 'Road, water-supply, telecom and Jal Jeevan Mission contract work carried out to government specification and timeline — under our Government Approved contractor status.',
-    tags: ['Jal Jeevan', 'Roads', 'Water Supply', 'Telecom'],
-    flipped: true,
+    description: 'Public-sector road, municipal water-supply, telecom ducting, and rural infrastructure under verified Government Approved contractor status.',
+    tags: ['Tenders', 'Public Works', 'Jal Jeevan']
   },
   {
     id: '05',
-    title: 'Tubewell & Borewell Drilling',
+    category: 'DRILLING & RIGS',
+    title: 'Tubewell & Deep Borewell Drilling',
     image: '/images/1d7b8a8c8b65abb79bd5405adc383d2f.jpg',
-    description: 'Bores for homes, farms and factories, drilled to the depth the site actually needs. Domestic, industrial and agricultural connections, handled start to finish by our own rigs.',
-    tags: ['Domestic', 'Agricultural', 'Industrial'],
-    flipped: false,
+    description: 'Deep rotary & DTH drilling for farms, industrial units, and residential clusters. Tested for flow-rate, casing alignment, and sustainable yield.',
+    tags: ['Industrial', 'Agricultural', 'Domestic']
+  },
+  {
+    id: '06',
+    category: 'REHABILITATION',
+    title: 'Borewell Cleaning & Recharging Pits',
+    image: '/images/0dadd9456dbd2cff60ab03a936f1ffeb.jpg',
+    description: 'Compressor cleaning, desilting of choked bores, yield revival, and groundwater recharge harvesting pits designed to maximize rainwater capture.',
+    tags: ['Desilting', 'Rainwater', 'Revival']
   }
 ];
 
 export default function Services() {
   return (
-    <section id="services" className="py-[100px] max-md:py-16 border-b border-line bg-paper">
-      <div className="max-w-[1180px] mx-auto px-7">
+    <section id="services" className="py-20 lg:py-28 bg-[#F8F6F0] bg-grid-pattern border-b border-[#E2DCD0]">
+      <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="grid grid-cols-2 gap-10 items-end mb-[54px] max-md:grid-cols-1">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="font-heading text-[clamp(2rem,2.4vw+1rem,2.8rem)] font-extrabold text-ink leading-tight"
-          >
-            What we do
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-ink-soft text-[1.02rem] max-w-[44ch]"
-          >
-            Five services built around infrastructure: getting water where it needs to go, building structures that hold up, and delivering government projects on spec.
-          </motion.p>
+        {/* Section Header (Cakrawala Powerful Services Style) */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#F5B301]" />
+              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#6B6B6B]">
+                OUR CORE CAPABILITIES
+              </span>
+            </div>
+            <h2 className="font-heading font-black text-[clamp(2.2rem,4vw,3.6rem)] uppercase tracking-tight text-[#1A1A1A] leading-[1.05]">
+              POWERFUL <span className="text-[#F5B301]">SERVICES</span> FOR INFRASTRUCTURE
+            </h2>
+          </div>
+          <p className="text-[#6B6B6B] max-w-[42ch] text-base leading-relaxed m-0">
+            End-to-end capabilities backed by company-owned machinery, skilled site engineers, and 33+ years of ground expertise.
+          </p>
         </div>
 
-        {/* Services List */}
-        <div>
+        {/* 6 Card Grid (Cakrawala Pattern C with Angular Tag Labels) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {servicesData.map((service, index) => (
-            <motion.div 
+            <motion.div
               key={service.id}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="grid grid-cols-2 gap-[60px] items-center mb-[88px] last:mb-0 max-md:grid-cols-1 max-md:gap-[26px] max-md:mb-[60px]"
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="group bg-white rounded-[20px] overflow-hidden border border-[#E2DCD0] shadow-sm hover:shadow-xl hover:border-[#F5B301] transition-all flex flex-col"
             >
-              {/* Image Side */}
-              <div 
-                className={`photo-container relative overflow-hidden aspect-[4/3] border border-line ${
-                  service.flipped ? 'lg:order-2 max-md:order-[-1]' : 'max-md:order-[-1]'
-                }`}
-              >
+              {/* Card Image with Angular Flag Tag */}
+              <div className="relative aspect-[16/10] overflow-hidden bg-[#1A1A1A]">
                 <img 
                   src={service.image} 
                   alt={service.title} 
-                  loading="lazy"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-              </div>
+                
+                {/* Angular Tag Label from theme.md */}
+                <div className="absolute top-3 left-3 z-10">
+                  <span className="tag-label shadow-md">
+                    {service.category}
+                  </span>
+                </div>
 
-              {/* Text Side */}
-              <div className={`${service.flipped ? 'lg:order-1' : ''}`}>
-                <div className="font-heading font-extrabold text-[0.95rem] text-water tracking-wide">
+                <div className="absolute bottom-3 right-3 z-10 w-8 h-8 rounded-full bg-[#1A1A1A]/80 text-[#F5B301] flex items-center justify-center font-heading font-bold text-xs">
                   {service.id}
                 </div>
-                <h3 className="font-heading font-extrabold text-[2rem] text-ink mt-2 leading-tight">
-                  {service.title}
-                </h3>
-                <p className="text-ink-soft text-[1.02rem] mt-3.5 max-w-[52ch]">
-                  {service.description}
-                </p>
-                <div className="flex gap-2 mt-4 flex-wrap">
-                  {service.tags.map((tag) => (
-                    <span 
-                      key={tag} 
-                      className="text-[0.78rem] font-semibold border border-line px-[11px] py-[5px] text-ink-soft bg-paper-2/30"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+              </div>
+
+              {/* Card Content */}
+              <div className="p-6 flex flex-col flex-grow justify-between">
+                <div>
+                  <h3 className="font-heading font-bold text-lg text-[#1A1A1A] uppercase tracking-wide group-hover:text-[#F5B301] transition-colors mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm text-[#6B6B6B] leading-relaxed mb-6">
+                    {service.description}
+                  </p>
+                </div>
+
+                {/* Tags & Action Link */}
+                <div className="pt-4 border-t border-[#F0E8D5] flex items-center justify-between">
+                  <div className="flex gap-1.5 flex-wrap">
+                    {service.tags.map((tag, tIndex) => (
+                      <span 
+                        key={tIndex} 
+                        className="text-[0.68rem] font-bold uppercase tracking-wider bg-[#F8F6F0] text-[#1A1A1A] px-2.5 py-1 rounded-md"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <a 
+                    href="#contact" 
+                    className="w-8 h-8 rounded-full bg-[#F5B301] text-[#1A1A1A] flex items-center justify-center group-hover:bg-[#1A1A1A] group-hover:text-[#F5B301] transition-colors flex-shrink-0"
+                    aria-label={`Enquire about ${service.title}`}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M7 17L17 7M17 7H7M17 7V17" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </a>
                 </div>
               </div>
             </motion.div>

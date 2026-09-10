@@ -43,191 +43,169 @@ const StatCounter = ({ end, suffix = '', isDecimal = false, duration = 2000 }) =
 };
 
 export default function About() {
+  const features = [
+    {
+      title: "SITE SURVEY & DESIGN",
+      desc: "Complete geotechnical soil survey, depth determination & blueprint planning."
+    },
+    {
+      title: "100% OWN MACHINERY",
+      desc: "Owned drilling rigs, cranes, pipeline equipment — no third party subcontracting."
+    },
+    {
+      title: "JAL JEEVAN MISSION",
+      desc: "Overhead tanks, underground reservoirs & multi-kilometer pipeline networks."
+    },
+    {
+      title: "GOVERNMENT APPROVED",
+      desc: "Class-certified contractor status for road, water and utility infrastructure."
+    }
+  ];
+
   return (
-    <section id="about" className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-b from-[#1E211D] via-[#151b24] to-[#0e131a] text-paper-3 border-b border-line/30">
-      
-      {/* Background blueprint grid accents */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-15"
-        style={{
-          backgroundImage: `
-            radial-gradient(rgba(250, 204, 21, 0.2) 1px, transparent 1px),
-            linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: '40px 40px, 80px 80px, 80px 80px'
-        }}
-      />
-
-      {/* Atmospheric yellow/amber ambient glow */}
-      <div className="absolute top-1/3 -left-32 w-96 h-96 bg-yellow-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-10 right-0 w-80 h-80 bg-rust/15 rounded-full blur-[100px] pointer-events-none" />
-
-      <div className="relative z-10 max-w-[1240px] mx-auto px-6 lg:px-8">
+    <section id="about" className="py-20 lg:py-28 bg-[#FFFFFF] border-b border-[#E2DCD0]">
+      <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
+        
+        {/* Equirt Style Grid: Image with Yellow Accent Box + Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* LEFT COLUMN: Text Content with Blur-to-Clear and Yellow Extraction */}
+          {/* LEFT: Image Card with Yellow Geometric Badge (Equirt Image 1 middle slide) */}
           <motion.div 
-            initial={{ opacity: 0, y: 45, filter: 'blur(16px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 flex flex-col justify-center"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-5 relative"
           >
-            {/* Animated Eyebrow Badge (Extracts to Yellow) */}
-            <motion.div 
-              initial={{ opacity: 0, filter: 'blur(10px)', x: -15 }}
-              whileInView={{ opacity: 1, filter: 'blur(0px)', x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-yellow-400/10 border border-yellow-400/40 text-yellow-400 font-mono text-xs font-bold tracking-widest uppercase mb-5 w-fit shadow-[0_0_15px_rgba(250,204,21,0.15)]"
-            >
-              <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
-              <span>// 01 · ABOUT THE ENTERPRISE</span>
-            </motion.div>
-
-            {/* Headline with dynamic color extraction to yellow */}
-            <h2 className="font-heading text-[clamp(2.1rem,3.8vw,3.4rem)] font-extrabold mb-6 leading-[1.05] tracking-tight text-paper-3">
-              A construction powerhouse built on{' '}
-              <motion.span 
-                initial={{ color: '#F1EEE4' }}
-                whileInView={{ color: '#facc15' }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="underline decoration-yellow-400/60 decoration-2 underline-offset-4"
-              >
-                Water Infrastructure
-              </motion.span>{' '}
-              &amp;{' '}
-              <motion.span 
-                initial={{ color: '#F1EEE4' }}
-                whileInView={{ color: '#facc15' }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.55 }}
-                className="underline decoration-yellow-400/60 decoration-2 underline-offset-4"
-              >
-                Government Projects
-              </motion.span>.
-            </h2>
-
-            {/* Body paragraphs */}
-            <div className="space-y-4 text-paper-3/85 text-base sm:text-[1.05rem] leading-relaxed">
-              <p>
-                Sonam Sales Corporation began in 1991 as a dedicated tubewell-drilling enterprise serving agrarian and domestic requirements across Lucknow and Hardoi. Over more than three decades of uncompromised on-site execution, the firm has expanded into a full-scope civil &amp; water-infrastructure contractor.
-              </p>
-              <p>
-                As a registered <span className="text-yellow-400 font-semibold">Government Approved</span> entity, we execute high-capacity drinking water pipelines, overhead RCC tanks, ground reservoirs, rural road networks, and Jal Jeevan Mission supply systems across Uttar Pradesh without relying on third-party subcontractors.
-              </p>
-            </div>
-
-            {/* Stats row with blur-to-clear & vibrant yellow extraction */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
-              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-5 mt-10 pt-6 border-t border-line/25"
-            >
-              {/* Stat 1 */}
-              <div className="border-t-2 border-yellow-400 pt-3 group">
-                <div className="font-heading font-extrabold text-3xl sm:text-[2.2rem] text-yellow-400 leading-none drop-shadow-[0_2px_10px_rgba(250,204,21,0.25)]">
-                  <StatCounter end={33} duration={2000} />
-                  <span>+</span>
-                </div>
-                <div className="text-xs text-paper-3/70 uppercase tracking-wider font-mono mt-1.5">Years In Business</div>
-              </div>
-
-              {/* Stat 2 */}
-              <div className="border-t-2 border-yellow-400 pt-3 group">
-                <div className="font-heading font-extrabold text-3xl sm:text-[2.2rem] text-yellow-400 leading-none drop-shadow-[0_2px_10px_rgba(250,204,21,0.25)]">
-                  <StatCounter end={1991} duration={2000} />
-                </div>
-                <div className="text-xs text-paper-3/70 uppercase tracking-wider font-mono mt-1.5">Established</div>
-              </div>
-
-              {/* Stat 3 */}
-              <div className="border-t-2 border-yellow-400 pt-3 group">
-                <div className="font-heading font-extrabold text-3xl sm:text-[2.2rem] text-yellow-400 leading-none drop-shadow-[0_2px_10px_rgba(250,204,21,0.25)]">
-                  <StatCounter end={4.6} isDecimal={true} suffix="★" duration={2000} />
-                </div>
-                <div className="text-xs text-paper-3/70 uppercase tracking-wider font-mono mt-1.5">Public Rating</div>
-              </div>
-
-              {/* Stat 4 */}
-              <div className="border-t-2 border-yellow-400 pt-3 group">
-                <div className="font-heading font-extrabold text-3xl sm:text-[2.2rem] text-yellow-400 leading-none drop-shadow-[0_2px_10px_rgba(250,204,21,0.25)]">
-                  <StatCounter end={92} suffix="%" duration={2000} />
-                </div>
-                <div className="text-xs text-paper-3/70 uppercase tracking-wider font-mono mt-1.5">Recommend Rate</div>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* RIGHT COLUMN: Incoming Image with Blur-to-Clear and Yellow Extraction */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.92, y: 50, filter: 'blur(22px)' }}
-            whileInView={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 relative group"
-          >
-            {/* Yellow ambient backlight */}
-            <div className="absolute -inset-3 bg-yellow-400/20 rounded-2xl blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-
-            {/* Image Frame with Yellow Architectural Borders */}
-            <div className="relative rounded-2xl overflow-hidden border-2 border-yellow-400/40 bg-[#0e141c]/90 backdrop-blur-md shadow-2xl p-3">
+            {/* Background Yellow Offset Box */}
+            <div className="relative rounded-[24px] bg-[#F8F6F0] p-4 border border-[#E2DCD0] shadow-xl">
               
-              {/* Blueprint technical corner brackets in Yellow */}
-              <div className="absolute top-1.5 left-1.5 w-4 h-4 border-t-2 border-l-2 border-yellow-400 z-30 pointer-events-none" />
-              <div className="absolute top-1.5 right-1.5 w-4 h-4 border-t-2 border-r-2 border-yellow-400 z-30 pointer-events-none" />
-              <div className="absolute bottom-1.5 left-1.5 w-4 h-4 border-b-2 border-l-2 border-yellow-400 z-30 pointer-events-none" />
-              <div className="absolute bottom-1.5 right-1.5 w-4 h-4 border-b-2 border-r-2 border-yellow-400 z-30 pointer-events-none" />
-
-              {/* Top HUD bar */}
-              <div className="flex items-center justify-between px-3 py-1.5 mb-2 border-b border-line/20 text-[0.72rem] font-mono text-paper-3/75">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
-                  <span className="text-yellow-400 font-semibold tracking-wider">CIVIL DRAWING // LEVEL 01</span>
-                </div>
-                <span className="text-paper-3/60 font-mono">SPEC-ARCH</span>
-              </div>
-
-              {/* Image with laser color extraction scan effect */}
-              <div className="relative rounded-xl overflow-hidden bg-black/40 aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
-                
-                {/* Yellow Scanning Laser Line (Color Extraction animation) */}
-                <motion.div 
-                  initial={{ top: '-15%', opacity: 1 }}
-                  whileInView={{ top: '115%', opacity: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.8, delay: 0.35, ease: 'easeInOut' }}
-                  className="absolute left-0 right-0 h-16 bg-gradient-to-b from-transparent via-yellow-400/45 to-yellow-400 z-20 pointer-events-none shadow-[0_0_25px_rgba(250,204,21,0.9)]"
-                />
-
+              {/* Image Container with Rounded Corners - Full Uncropped View */}
+              <div className="relative rounded-[20px] overflow-hidden bg-[#FAF8F5] p-2 flex items-center justify-center min-h-[420px] shadow-inner">
                 <img 
                   src="/images/650047a8f4260231218333be145a8204.jpg" 
-                  alt="Construction and infrastructure planning visualization" 
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  alt="Tejas Construction Engineering and Infrastructure" 
+                  className="w-full h-auto max-h-[480px] object-contain rounded-xl block mx-auto transition-transform duration-700 hover:scale-[1.02]"
                 />
 
-                {/* Bottom Architectural Blueprint Badge in Yellow */}
-                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#0e141c] via-[#0e141c]/80 to-transparent p-4 z-20 flex items-center justify-between">
-                  <div>
-                    <div className="font-heading font-extrabold text-base text-yellow-400 tracking-wide">
-                      BLUEPRINT TO INFRASTRUCTURE
-                    </div>
-                    <div className="text-[0.72rem] text-paper-3/80 font-mono">
-                      Site Survey • Structural Planning • Handover
-                    </div>
-                  </div>
-                  <span className="text-[0.68rem] font-mono font-bold bg-yellow-400/20 text-yellow-400 border border-yellow-400/50 px-2.5 py-1 rounded uppercase">
-                    Verified
+                {/* Yellow Angular Tag Label (theme.md) */}
+                <div className="absolute top-4 left-4 z-20">
+                  <span className="tag-label shadow-md">
+                    CONSTRUCTION &amp; WATER INFRASTRUCTURE
                   </span>
                 </div>
-              </div>
 
+                {/* Equirt Yellow Badge with Crossed Hammers */}
+                <div className="absolute bottom-4 right-4 z-20 bg-[#F5B301] p-3 rounded-xl shadow-lg flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-[#1A1A1A] text-[#F5B301] flex items-center justify-center font-bold">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                    </svg>
+                  </div>
+                  <div className="text-left">
+                    <div className="font-heading font-extrabold text-xs text-[#1A1A1A] uppercase tracking-wider">
+                      GOVERNMENT VERIFIED
+                    </div>
+                    <div className="text-[0.68rem] text-[#1A1A1A]/80 font-semibold">
+                      Class-A Infrastructure Contractor
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </motion.div>
+
+          {/* RIGHT: Typography & 4-Item Feature Grid (Equirt Style) */}
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-7 flex flex-col justify-center"
+          >
+            {/* Tagline */}
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#F5B301]" />
+              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#6B6B6B]">
+                ABOUT TEJAS CONSTRUCTION &amp; INFRASTRUCTURE PVT. LTD.
+              </span>
+            </div>
+
+            {/* Main Headline */}
+            <h2 className="font-heading font-black text-[clamp(2.2rem,4vw,3.6rem)] uppercase tracking-tight text-[#1A1A1A] leading-[1.05] mb-5">
+              LIFTING YOUR PROJECT TO <span className="text-[#F5B301]">NEW HEIGHTS</span>
+            </h2>
+
+            {/* Paragraph */}
+            <p className="text-[#6B6B6B] text-base sm:text-[1.05rem] leading-relaxed mb-8">
+              Founded in 1991 in Lucknow, Tejas Construction &amp; Infrastructure Pvt. Ltd. has grown into a major infrastructure contracting entity across Uttar Pradesh. We execute water-supply systems, heavy pipeline laying, overhead tanks, and civil works for both government initiatives and private industrial clients.
+            </p>
+
+            {/* 4 Feature Boxes (from Equirt image 1 middle card) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              {features.map((feat, index) => (
+                <div 
+                  key={index}
+                  className="bg-[#F8F6F0] p-4 rounded-xl border border-[#E2DCD0] flex items-start gap-3.5 hover:border-[#F5B301] transition-all hover:shadow-md"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-[#F5B301] text-[#1A1A1A] flex items-center justify-center flex-shrink-0 font-bold shadow-sm">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-heading font-bold text-xs sm:text-sm uppercase tracking-wide text-[#1A1A1A] mb-1">
+                      {feat.title}
+                    </h3>
+                    <p className="text-[0.82rem] text-[#6B6B6B] leading-snug m-0">
+                      {feat.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Equirt Style Yellow Stat Bar (theme.md Pattern C) */}
+            <div className="rounded-2xl bg-[#F5B301] p-6 shadow-lg">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                <div className="border-r border-[#1A1A1A]/15 last:border-r-0">
+                  <div className="font-heading font-black text-3xl sm:text-4xl text-[#1A1A1A]">
+                    <StatCounter end={33} duration={2000} />+
+                  </div>
+                  <div className="text-xs uppercase font-bold tracking-wider text-[#1A1A1A]/80 mt-1">
+                    Years Experience
+                  </div>
+                </div>
+
+                <div className="border-r border-[#1A1A1A]/15 last:border-r-0">
+                  <div className="font-heading font-black text-3xl sm:text-4xl text-[#1A1A1A]">
+                    <StatCounter end={1991} duration={2000} />
+                  </div>
+                  <div className="text-xs uppercase font-bold tracking-wider text-[#1A1A1A]/80 mt-1">
+                    Established
+                  </div>
+                </div>
+
+                <div className="border-r border-[#1A1A1A]/15 last:border-r-0">
+                  <div className="font-heading font-black text-3xl sm:text-4xl text-[#1A1A1A]">
+                    <StatCounter end={4.6} isDecimal={true} suffix="★" duration={2000} />
+                  </div>
+                  <div className="text-xs uppercase font-bold tracking-wider text-[#1A1A1A]/80 mt-1">
+                    Public Rating
+                  </div>
+                </div>
+
+                <div>
+                  <div className="font-heading font-black text-3xl sm:text-4xl text-[#1A1A1A]">
+                    <StatCounter end={92} suffix="%" duration={2000} />
+                  </div>
+                  <div className="text-xs uppercase font-bold tracking-wider text-[#1A1A1A]/80 mt-1">
+                    Recommend Rate
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </motion.div>
 
         </div>

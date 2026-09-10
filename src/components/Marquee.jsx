@@ -1,34 +1,33 @@
 import React from 'react';
 
 const items = [
-  "PIPELINE INSTALLATION", 
-  "WATER INFRASTRUCTURE", 
+  "HEAVY EQUIPMENT SOLUTIONS", 
+  "WATER PIPELINE NETWORKS", 
   "JAL JEEVAN MISSION", 
-  "CIVIL CONSTRUCTION", 
-  "OVERHEAD TANKS", 
+  "CIVIL INFRASTRUCTURE", 
+  "OVERHEAD WATER TANKS", 
   "GOVERNMENT PROJECTS", 
-  "BOREWELL DRILLING", 
+  "TUBEWELL & BOREWELL DRILLING", 
   "EST. 1991 · LUCKNOW & HARDOI, UP"
 ];
 
 const Marquee = () => {
   return (
-    <div className="relative z-20 bg-ink text-paper-3 overflow-hidden py-4 border-b border-line/40 shadow-inner">
-      {/* Side gradient fades for smooth industrial ticker look */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-ink to-transparent z-10" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-ink to-transparent z-10" />
+    <div className="relative bg-[#1A1A1A] text-white overflow-hidden py-4 border-y-2 border-[#F5B301] shadow-md">
+      {/* Side gradient fades */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-[#1A1A1A] to-transparent z-10" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-[#1A1A1A] to-transparent z-10" />
 
       {/* Inner div with continuous animation */}
       <div className="flex w-max animate-marquee">
-        {/* Content spans repeated twice for seamless loop */}
         {[...Array(2)].map((_, loopIndex) => (
-          <div key={loopIndex} className="flex">
+          <div key={loopIndex} className="flex items-center">
             {items.map((item, index) => (
               <React.Fragment key={index}>
-                <span className="flex items-center px-6 sm:px-8 font-heading font-bold text-[1.05rem] sm:text-[1.15rem] tracking-wider whitespace-nowrap text-paper-3/95">
+                <span className="flex items-center px-6 sm:px-8 font-heading font-bold text-sm sm:text-base uppercase tracking-widest whitespace-nowrap text-white">
                   {item}
                 </span>
-                <span className="text-rust flex items-center justify-center font-bold text-lg">
+                <span className="text-[#F5B301] flex items-center justify-center font-black text-xl">
                   •
                 </span>
               </React.Fragment>
@@ -36,16 +35,6 @@ const Marquee = () => {
           </div>
         ))}
       </div>
-      
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 28s linear infinite;
-        }
-      `}} />
     </div>
   );
 };
