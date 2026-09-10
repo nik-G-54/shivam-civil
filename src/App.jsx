@@ -9,7 +9,6 @@ import WhyUs from './components/WhyUs'
 import Coverage from './components/Coverage'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import MobileCTA from './components/MobileCTA'
 
 const App = () => {
   return (
@@ -25,7 +24,6 @@ const App = () => {
       <Coverage />
       <Contact />
       <Footer />
-      <MobileCTA />
     </>
   )
 }

@@ -8,31 +8,31 @@ const Hero = () => {
       {/* Background Decorative Diagonal Yellow Slash (Equirt pattern) */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-[#F5B301]/10 pointer-events-none transform skew-x-12 origin-top-right hidden lg:block" />
       
-      <div className="max-w-[1240px] mx-auto px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           
           {/* LEFT: Typography & CTAs (Equirt style) */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="lg:col-span-7 flex flex-col justify-center"
+            className="lg:col-span-7 flex flex-col justify-center w-full"
           >
             {/* Tagline with Tejas Construction */}
-            <div className="inline-flex items-center gap-2 mb-4">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#F5B301] animate-pulse" />
-              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#1A1A1A]">
+            <div className="inline-flex items-center gap-2 mb-4 max-w-full">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#F5B301] animate-pulse flex-shrink-0" />
+              <span className="font-heading font-bold text-[0.68rem] sm:text-xs uppercase tracking-wider sm:tracking-widest text-[#1A1A1A] break-words">
                 TEJAS CONSTRUCTION &amp; INFRASTRUCTURE PVT. LTD. // UP GOVT APPROVED
               </span>
             </div>
 
-            {/* Main Heading (Equirt typography style) */}
-            <h1 className="font-heading font-black text-[clamp(2.6rem,5.5vw,4.6rem)] uppercase tracking-tight text-[#1A1A1A] leading-[1.02] mb-6">
+            {/* Main Heading (Equirt typography style - perfectly sized for mobile & desktop) */}
+            <h1 className="font-heading font-black text-[2.1rem] sm:text-4xl md:text-5xl lg:text-[4.2rem] xl:text-[4.5rem] uppercase tracking-tight text-[#1A1A1A] leading-[1.06] sm:leading-[1.02] mb-5 sm:mb-6 break-words w-full">
               HEAVY INFRASTRUCTURE <span className="text-[#F5B301]">SOLUTIONS FOR EVERY</span> PROJECT
             </h1>
 
             {/* Description */}
-            <p className="text-[#6B6B6B] text-base sm:text-lg max-w-[52ch] leading-relaxed mb-8">
+            <p className="text-[#6B6B6B] text-sm sm:text-base lg:text-lg max-w-[52ch] leading-relaxed mb-6 sm:mb-8">
               Thirty-three years of specialized execution across Uttar Pradesh — water distribution pipeline networks, Jal Jeevan Mission, overhead reservoirs, civil construction, and heavy machinery operations.
             </p>
 

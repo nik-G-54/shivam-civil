@@ -1,293 +1,401 @@
-import React, { useEffect, useRef, useState } from 'react';
-import createGlobe from 'cobe';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useRef, useEffect, useState } from 'react';
+import * as maplibregl from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import { motion } from 'framer-motion';
 
-const locations = [
-  {
-    id: 'lucknow',
-    name: 'Lucknow Headquarters',
-    address: 'Chand Ganj Garden, Kapoorthala, Lucknow, UP',
-    phone: '+91 63070 41852',
-    lat: 26.8848,
-    lng: 80.9335,
-    tag: 'REGISTERED HQ & YARD',
-    // cobe phi calculation: longitude to phi
-    phi: 4.85,
-    theta: 0.35,
-    desc: 'Main administrative office, technical drafting division, logistics depot, and heavy machinery yard.'
-  },
-  {
-    id: 'hardoi',
-    name: 'Hardoi Operations Base',
-    address: 'Central District Yard, Hardoi, Uttar Pradesh',
-    phone: '+91 63070 41852',
-    lat: 27.3957,
-    lng: 80.1293,
-    tag: 'ORIGIN HUB (EST. 1991)',
-    phi: 4.83,
-    theta: 0.36,
-    desc: 'Primary agricultural drilling base, deep aquifer equipment storage, and maintenance workshop.'
-  },
-  {
-    id: 'kanpur',
-    name: 'Kanpur Project Corridor',
-    address: 'Industrial Development Belt, Kanpur, UP',
-    phone: '+91 63070 41852',
-    lat: 26.4499,
-    lng: 80.3319,
-    tag: 'MUNICIPAL PIPELINES',
-    phi: 4.86,
-    theta: 0.34,
-    desc: 'Heavy pipeline laying site camp, booster pumping stations, and municipal water corridors.'
-  }
-];
+const HARDOI_COORDS = [80.1293, 27.3957]; // [longitude, latitude]
 
 export default function GlobeMap() {
-  const canvasRef = useRef(null);
-  const pointerInteracting = useRef(null);
-  const pointerInteractionMovement = useRef(0);
-  
-  const [activeLocation, setActiveLocation] = useState(locations[0]);
-  const [isZoomed, setIsZoomed] = useState(false);
-  const [targetPhi, setTargetPhi] = useState(4.85);
-  const [targetTheta, setTargetTheta] = useState(0.35);
+  const mapContainerRef = useRef(null);
+  const mapRef = useRef(null);
+  const markerRef = useRef(null);
+  const animationFrameRef = useRef(null);
 
-  const phiRef = useRef(4.85);
-  const thetaRef = useRef(0.35);
+  const [currentZoom, setCurrentZoom] = useState(1.8);
+  const [currentPitch, setCurrentPitch] = useState(0);
+  const [currentBearing, setCurrentBearing] = useState(0);
+  const [isAutoRotating, setIsAutoRotating] = useState(true);
+  const [cameraMode, setCameraMode] = useState('globe'); // 'globe' | 'hardoi'
 
   useEffect(() => {
-    let width = 0;
-    const onResize = () => {
-      if (canvasRef.current) {
-        width = canvasRef.current.offsetWidth;
-      }
-    };
-    window.addEventListener('resize', onResize);
-    onResize();
+    if (!mapContainerRef.current) return;
 
-    let currentPhi = phiRef.current;
-    let currentTheta = thetaRef.current;
+    // High-resolution satellite tiles (Esri World Imagery) with dark space background
+    const map = new maplibregl.Map({
+      container: mapContainerRef.current,
+      style: {
+        version: 8,
+        sources: {
+          'esri-satellite': {
+            type: 'raster',
+            tiles: [
+              'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+            ],
+            tileSize: 256,
+            attribution: 'Esri, Maxar, Earthstar Geographics'
+          }
+        },
+        layers: [
+          {
+            id: 'satellite-tiles',
+            type: 'raster',
+            source: 'esri-satellite',
+            minzoom: 0,
+            maxzoom: 19
+          }
+        ]
+      },
+      center: HARDOI_COORDS,
+      zoom: 1.8,
+      pitch: 0,
+      bearing: 0,
+      maxPitch: 75,
+      canvasContextAttributes: { antialias: true }
+    });
 
-    const globe = createGlobe(canvasRef.current, {
-      devicePixelRatio: 2,
-      width: width * 2 || 800,
-      height: width * 2 || 800,
-      phi: 4.85,
-      theta: 0.35,
-      dark: 1,
-      diffuse: 1.2,
-      mapSamples: 16000,
-      mapBrightness: 4,
-      baseColor: [0.12, 0.14, 0.18],
-      markerColor: [0.96, 0.7, 0.0], // Brand Yellow #F5B301
-      glowColor: [0.96, 0.7, 0.0],
-      markers: [
-        { location: [26.8848, 80.9335], size: 0.12 }, // Lucknow
-        { location: [27.3957, 80.1293], size: 0.09 }, // Hardoi
-        { location: [26.4499, 80.3319], size: 0.09 }  // Kanpur
-      ],
-      onRender: (state) => {
-        if (!pointerInteracting.current) {
-          // If a location is targeted, smoothly interpolate to target angle
-          currentPhi += (targetPhi - currentPhi) * 0.06;
-          currentTheta += (targetTheta - currentTheta) * 0.06;
-        } else {
-          currentPhi += 0.005;
+    mapRef.current = map;
+
+    // Set 3D Globe Projection on load
+    map.on('style.load', () => {
+      try {
+        if (typeof map.setProjection === 'function') {
+          map.setProjection({ type: 'globe' });
         }
-        state.phi = currentPhi;
-        state.theta = currentTheta;
-        state.width = width * 2;
-        state.height = width * 2;
+      } catch (err) {
+        console.warn('3D Globe projection setup notice:', err);
       }
     });
 
-    return () => {
-      globe.destroy();
-      window.removeEventListener('resize', onResize);
-    };
-  }, [targetPhi, targetTheta]);
+    // Custom Glassmorphism Popup for Hardoi
+    const popup = new maplibregl.Popup({ 
+      offset: 28, 
+      closeButton: false,
+      className: 'hardoi-custom-popup'
+    }).setHTML(`
+      <div style="padding: 10px 14px; font-family: 'Poppins', sans-serif; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px); color: #ffffff; border-radius: 12px; border: 1.5px solid #F5B301; box-shadow: 0 12px 30px rgba(0,0,0,0.6); min-width: 200px;">
+        <div style="font-size: 10px; font-weight: 800; color: #F5B301; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px;">
+          TEJAS CONSTRUCTION &amp; INFRASTRUCTURE
+        </div>
+        <h4 style="margin: 0; font-size: 15px; font-weight: 900; color: #ffffff;">Hardoi, Uttar Pradesh</h4>
+        <p style="margin: 3px 0 0; font-size: 11px; color: #94a3b8;">PIN: 241001 · Central Equipment Yard</p>
+        <p style="margin: 2px 0 0; font-size: 10px; font-family: monospace; color: #F5B301;">27.3957° N, 80.1293° E</p>
+        <div style="margin-top: 6px; font-size: 11px; font-weight: 700; color: #10b981; display: flex; align-items: center; gap: 5px;">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: #10b981; display: inline-block; box-shadow: 0 0 8px #10b981;"></span>
+          Primary Operations Hub (Active)
+        </div>
+      </div>
+    `);
 
-  // Handle clicking on a location to trigger cinematic rotation & auto zoom
-  const handleSelectLocation = (loc) => {
-    setActiveLocation(loc);
-    setTargetPhi(loc.phi);
-    setTargetTheta(loc.theta);
-    setIsZoomed(true);
+    // Custom Glowing Radar Marker Element
+    const el = document.createElement('div');
+    el.className = 'hardoi-marker-pin';
+    el.innerHTML = `
+      <div class="radar-pulse-ring"></div>
+      <div class="radar-center-dot"></div>
+      <div class="hardoi-pill-badge">📍 HARDOI, UP</div>
+    `;
+
+    el.onclick = () => {
+      flyToHardoi();
+      popup.addTo(map);
+    };
+
+    // Attach Marker to Map
+    const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
+      .setLngLat(HARDOI_COORDS)
+      .setPopup(popup)
+      .addTo(map);
+
+    markerRef.current = marker;
+
+    // Open popup initially when zoomed
+    map.on('move', () => {
+      const zoom = map.getZoom();
+      setCurrentZoom(zoom);
+      setCurrentPitch(Math.round(map.getPitch()));
+      setCurrentBearing(Math.round(map.getBearing()));
+    });
+
+    // Auto-rotation engine
+    let userInteracting = false;
+    map.on('mousedown', () => { userInteracting = true; });
+    map.on('dragstart', () => { userInteracting = true; });
+    map.on('touchstart', () => { userInteracting = true; });
+
+    const rotateGlobe = () => {
+      if (mapRef.current && isAutoRotating && !userInteracting && mapRef.current.getZoom() < 3.5) {
+        const center = mapRef.current.getCenter();
+        center.lng += 0.2;
+        mapRef.current.easeTo({ center, duration: 100, easing: (n) => n });
+      }
+      animationFrameRef.current = requestAnimationFrame(rotateGlobe);
+    };
+
+    rotateGlobe();
+
+    // Map controls: Navigation & scale
+    map.addControl(new maplibregl.NavigationControl({ showCompass: true, showZoom: true }), 'bottom-right');
+
+    return () => {
+      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+      map.remove();
+    };
+  }, []);
+
+  // 1. Cinematic Zoom-In: Fly from Space down to Hardoi street/district level (Zoom 13.5)
+  const flyToHardoi = () => {
+    if (!mapRef.current) return;
+    setIsAutoRotating(false);
+    setCameraMode('hardoi');
+
+    mapRef.current.flyTo({
+      center: HARDOI_COORDS,
+      zoom: 13.5,
+      pitch: 40,
+      bearing: -10,
+      duration: 2800,
+      essential: true
+    });
+
+    // Open popup after arrival
+    setTimeout(() => {
+      if (markerRef.current) {
+        markerRef.current.togglePopup();
+      }
+    }, 2800);
+  };
+
+  // 2. Cinematic Zoom-Out: Reset camera back to full 3D Earth Globe view (Zoom 1.8)
+  const resetToGlobe = () => {
+    if (!mapRef.current) return;
+    setCameraMode('globe');
+
+    mapRef.current.flyTo({
+      center: HARDOI_COORDS,
+      zoom: 1.8,
+      pitch: 0,
+      bearing: 0,
+      duration: 2400,
+      curve: 1.4,
+      essential: true
+    });
+
+    setTimeout(() => {
+      setIsAutoRotating(true);
+    }, 2500);
+  };
+
+  // 3. Toggle 3D Pitch View (45 deg angle)
+  const togglePitch = () => {
+    if (!mapRef.current) return;
+    const newPitch = mapRef.current.getPitch() > 20 ? 0 : 50;
+    mapRef.current.easeTo({ pitch: newPitch, duration: 1000 });
   };
 
   return (
-    <div className="relative rounded-[24px] bg-[#12161D] border-2 border-[#E2DCD0] shadow-2xl overflow-hidden p-4 sm:p-6 text-white">
+    <div className="relative rounded-[24px] bg-[#030712] border-2 border-[#F5B301] shadow-2xl overflow-hidden text-white">
       
       {/* Top Header HUD Bar */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-4 border-b border-white/10 relative z-20">
+      <div className="relative z-20 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-[#0a0f1d]/90 backdrop-blur-md border-b border-white/10">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[#F5B301] text-[#1A1A1A] flex items-center justify-center font-bold">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <div className="w-10 h-10 rounded-xl bg-[#F5B301] text-[#1A1A1A] flex items-center justify-center font-bold shadow-md flex-shrink-0">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="2" y1="12" x2="22" y2="12"></line>
               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
             </svg>
           </div>
           <div>
-            <div className="font-heading font-black text-sm uppercase tracking-wider text-[#F5B301]">
-              3D CINEMATIC SATELLITE GLOBE
+            <div className="font-heading font-black text-sm uppercase tracking-wider text-[#F5B301] flex items-center gap-2">
+              <span>3D SATELLITE GLOBE // MAPLIBRE GL</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
             </div>
-            <div className="text-[0.68rem] text-white/60 font-mono">
-              CLICK ANY OPERATIONAL HUB TO AUTO-ROTATE &amp; ZOOM
+            <div className="text-[0.72rem] text-white/70 font-mono">
+              REAL GPS: HARDOI, UTTAR PRADESH · [80.1293° E, 27.3957° N]
             </div>
           </div>
         </div>
 
-        {/* Location Selector Tabs */}
-        <div className="flex gap-2 flex-wrap">
-          {locations.map((loc) => (
-            <button
-              key={loc.id}
-              onClick={() => handleSelectLocation(loc)}
-              className={`px-3 py-1.5 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer ${
-                activeLocation.id === loc.id
-                  ? 'bg-[#F5B301] text-[#1A1A1A] shadow-md scale-105'
-                  : 'bg-white/10 text-white/80 hover:bg-white/20'
-              }`}
-            >
-              <span className={`w-1.5 h-1.5 rounded-full ${activeLocation.id === loc.id ? 'bg-[#1A1A1A]' : 'bg-[#F5B301]'}`} />
-              <span>{loc.id}</span>
-            </button>
-          ))}
+        {/* Primary Action Buttons (Desktop & Mobile Friendly) */}
+        <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
+          <button
+            onClick={flyToHardoi}
+            className={`flex-1 sm:flex-none px-4 py-2.5 rounded-full font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md ${
+              cameraMode === 'hardoi'
+                ? 'bg-[#F5B301] text-[#1A1A1A] shadow-[#F5B301]/30 scale-105'
+                : 'bg-[#F5B301] text-[#1A1A1A] hover:bg-[#E8A800]'
+            }`}
+          >
+            <span className="w-2 h-2 rounded-full bg-[#1A1A1A] animate-ping" />
+            <span>Fly to Hardoi Site</span>
+          </button>
+
+          <button
+            onClick={resetToGlobe}
+            className={`flex-1 sm:flex-none px-4 py-2.5 rounded-full font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer border ${
+              cameraMode === 'globe'
+                ? 'bg-white/20 text-[#F5B301] border-[#F5B301]'
+                : 'bg-white/10 hover:bg-white/20 text-white border-white/20'
+            }`}
+          >
+            <span>Reset 3D Globe</span>
+            <span>↺</span>
+          </button>
+
+          <button
+            onClick={togglePitch}
+            className="hidden sm:flex px-3 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-mono font-bold uppercase transition-colors"
+            title="Toggle 3D Horizon Tilt"
+          >
+            {currentPitch > 20 ? '2D Top' : '3D Tilt'}
+          </button>
         </div>
       </div>
 
-      {/* Main 3D Globe Stage */}
-      <div className="relative aspect-square sm:aspect-[16/11] flex items-center justify-center overflow-hidden my-2">
-        
-        {/* Animated Globe Canvas */}
-        <motion.div
-          animate={{ scale: isZoomed ? 1.18 : 1 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-[560px] aspect-square flex items-center justify-center cursor-grab active:cursor-grabbing"
-          onPointerDown={(e) => {
-            pointerInteracting.current = e.clientX - pointerInteractionMovement.current;
-          }}
-          onPointerUp={() => {
-            pointerInteracting.current = null;
-          }}
-          onPointerOut={() => {
-            pointerInteracting.current = null;
-          }}
-          onMouseMove={(e) => {
-            if (pointerInteracting.current !== null) {
-              const delta = e.clientX - pointerInteracting.current;
-              pointerInteractionMovement.current = delta;
-              setTargetPhi(phiRef.current + delta * 0.005);
-            }
-          }}
-          onTouchMove={(e) => {
-            if (pointerInteracting.current !== null && e.touches[0]) {
-              const delta = e.touches[0].clientX - pointerInteracting.current;
-              pointerInteractionMovement.current = delta;
-              setTargetPhi(phiRef.current + delta * 0.005);
-            }
-          }}
-        >
-          <canvas
-            ref={canvasRef}
-            className="w-full h-full opacity-95 transition-opacity"
-            style={{ width: '100%', height: '100%', maxWidth: '100%', aspectRatio: 1 }}
-          />
+      {/* MapLibre GL 3D Globe Viewport */}
+      <div className="relative w-full h-[450px] sm:h-[520px] lg:h-[580px] bg-[#030712] overflow-hidden">
+        <div ref={mapContainerRef} className="w-full h-full" />
 
-          {/* USER'S CUSTOM LOCATION PIN LOADER OVERLAY */}
-          {/* Exact CSS provided by the user with pulse animation */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-30 flex flex-col items-center">
-            <div className="location-pulse-loader" />
-            <div className="mt-2 bg-black/85 backdrop-blur-md px-2.5 py-1 rounded-md border border-[#F5B301]/60 text-[0.68rem] font-mono text-[#F5B301] shadow-lg whitespace-nowrap">
-              TARGET // {activeLocation.lat.toFixed(4)}°N, {activeLocation.lng.toFixed(4)}°E
-            </div>
+        {/* Floating Quick Navigation for Mobile Users */}
+        <div className="sm:hidden absolute top-3 left-3 right-3 z-10 flex items-center justify-between gap-2 pointer-events-none">
+          <div className="pointer-events-auto bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-[#F5B301]/50 text-[0.68rem] font-mono text-[#F5B301] shadow-lg">
+            📍 Hardoi Hub · {currentZoom > 10 ? 'Street View' : 'Orbital View'}
           </div>
-        </motion.div>
 
-        {/* Ambient Glow behind the globe */}
-        <div className="absolute inset-0 bg-radial from-[#F5B301]/10 via-transparent to-transparent pointer-events-none" />
-      </div>
+          <button
+            onClick={cameraMode === 'hardoi' ? resetToGlobe : flyToHardoi}
+            className="pointer-events-auto bg-[#F5B301] text-[#1A1A1A] px-3.5 py-1.5 rounded-full font-heading font-bold text-[0.7rem] uppercase tracking-wider shadow-lg flex items-center gap-1.5 active:scale-95 transition-transform"
+          >
+            <span>{cameraMode === 'hardoi' ? 'Orbit ↺' : 'Zoom In 🔍'}</span>
+          </button>
+        </div>
 
-      {/* Cinematic Location Details Card Below */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeLocation.id}
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -15 }}
-          transition={{ duration: 0.35 }}
-          className="relative z-20 bg-[#1A1A1A] p-4 sm:p-5 rounded-xl border border-white/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg"
-        >
+        {/* Real-time Telemetry HUD (Bottom Left) */}
+        <div className="absolute bottom-4 left-4 z-10 hidden sm:flex items-center gap-3 bg-black/80 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/15 text-[0.7rem] font-mono text-white/80 shadow-lg">
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-[0.68rem] font-mono font-bold bg-[#F5B301] text-[#1A1A1A] px-2 py-0.5 rounded uppercase">
-                {activeLocation.tag}
-              </span>
-              <span className="text-xs text-white/50 font-mono">
-                TEJAS CONSTRUCTION &amp; INFRASTRUCTURE PVT. LTD.
-              </span>
-            </div>
-            <h4 className="font-heading font-black text-lg sm:text-xl text-white uppercase tracking-wide m-0">
-              {activeLocation.name}
-            </h4>
-            <div className="text-xs text-white/80 mt-1 flex items-center gap-2">
-              <span>📍 {activeLocation.address}</span>
-            </div>
-            <p className="text-xs text-white/60 mt-1 max-w-[52ch] m-0">
-              {activeLocation.desc}
-            </p>
+            <span className="text-[#F5B301]">ZOOM:</span> {currentZoom.toFixed(1)}x
           </div>
-
-          <div className="flex sm:flex-col items-center sm:items-end gap-2.5 flex-shrink-0 w-full sm:w-auto">
-            <a 
-              href={`tel:${activeLocation.phone.replace(/\s+/g, '')}`} 
-              className="btn-primary text-xs tracking-wider py-2 px-4 flex-1 sm:flex-none text-center justify-center w-full"
-            >
-              <span>Call {activeLocation.phone}</span>
-            </a>
-            <a 
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(activeLocation.address)}`} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-xs text-[#F5B301] hover:underline flex items-center gap-1 font-bold uppercase tracking-wider"
-            >
-              <span>Open in Google Maps</span>
-              <span>↗</span>
-            </a>
+          <span className="text-white/30">•</span>
+          <div>
+            <span className="text-[#F5B301]">PITCH:</span> {currentPitch}°
           </div>
-        </motion.div>
-      </AnimatePresence>
+          <span className="text-white/30">•</span>
+          <div>
+            <span className="text-[#F5B301]">BEARING:</span> {currentBearing}°
+          </div>
+          <span className="text-white/30">•</span>
+          <div className="text-emerald-400 font-bold">
+            ESRI 3D PLANET
+          </div>
+        </div>
+      </div>
 
-      {/* USER'S EXACT LOCATION LOADER CSS FROM PROMPT */}
+      {/* Bottom Hardoi Operational Card */}
+      <div className="relative z-20 p-4 sm:p-5 bg-[#0a0e1a] border-t border-white/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-[0.65rem] font-mono font-bold bg-[#F5B301] text-[#1A1A1A] px-2 py-0.5 rounded uppercase">
+              OPERATIONAL HUB
+            </span>
+            <span className="text-xs text-white/60 font-mono">
+              TEJAS CONSTRUCTION &amp; INFRASTRUCTURE PVT. LTD.
+            </span>
+          </div>
+          <h4 className="font-heading font-black text-base sm:text-lg text-white uppercase tracking-wide m-0">
+            Hardoi Central Equipment Yard &amp; Workshop
+          </h4>
+          <div className="text-xs text-white/75 mt-0.5">
+            Central District Yard, Hardoi, Uttar Pradesh 241001 · GPS: [80.1293° E, 27.3957° N]
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3 w-full sm:w-auto">
+          <a
+            href="tel:+916307041852"
+            className="btn-primary text-xs tracking-wider py-2.5 px-5 flex-1 sm:flex-none text-center justify-center"
+          >
+            <span>Call +91 63070 41852</span>
+          </a>
+
+          <button
+            onClick={flyToHardoi}
+            className="btn-dark text-xs tracking-wider py-2.5 px-4 flex-1 sm:flex-none text-center justify-center"
+          >
+            <span>Fly There ✈</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Custom Marker Styling & Radar Animations */}
       <style dangerouslySetInnerHTML={{__html: `
-        .location-pulse-loader {
-          width: 44.8px;
-          height: 44.8px;
+        .hardoi-marker-pin {
           position: relative;
-          transform: rotate(45deg);
+          width: 32px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
         }
 
-        .location-pulse-loader:before,
-        .location-pulse-loader:after {
-          content: "";
+        .radar-pulse-ring {
           position: absolute;
-          inset: 0;
-          border-radius: 50% 50% 0 50%;
-          background: #0000;
-          background-image: radial-gradient(circle 11.2px at 50% 50%, #0000 94%, #ff4747);
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: rgba(245, 179, 1, 0.25);
+          border: 1.5px solid #F5B301;
+          animation: radarPulse 1.8s ease-out infinite;
         }
 
-        .location-pulse-loader:after {
-          animation: pulse-ytk0dhmd 1s infinite;
-          transform: perspective(336px) translateZ(0px);
+        .radar-center-dot {
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+          background: #F5B301;
+          border: 2px solid #ffffff;
+          box-shadow: 0 0 12px #F5B301, 0 0 24px #F5B301;
+          position: relative;
+          z-index: 2;
         }
 
-        @keyframes pulse-ytk0dhmd {
-          to {
-            transform: perspective(336px) translateZ(168px);
+        .hardoi-pill-badge {
+          position: absolute;
+          top: -26px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(15, 23, 42, 0.95);
+          color: #F5B301;
+          font-family: 'Poppins', sans-serif;
+          font-size: 10px;
+          font-weight: 800;
+          padding: 2px 8px;
+          border-radius: 6px;
+          border: 1px solid #F5B301;
+          white-space: nowrap;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+          pointer-events: none;
+        }
+
+        @keyframes radarPulse {
+          0% {
+            transform: scale(0.6);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(2.2);
             opacity: 0;
           }
+        }
+
+        .maplibregl-popup-content {
+          padding: 0 !important;
+          background: transparent !important;
+          box-shadow: none !important;
+        }
+
+        .maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
+          border-top-color: #F5B301 !important;
         }
       `}} />
     </div>
